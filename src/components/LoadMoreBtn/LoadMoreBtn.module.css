@@ -1,0 +1,11 @@
+.loadMoreBtn {
+  background-color: #0000ff;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+}
+
+.loadMoreBtnWrapper {
+  display: flex;
+  justify-content: center;
+}

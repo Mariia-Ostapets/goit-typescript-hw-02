@@ -1,0 +1,21 @@
+.header {
+  background-color: #87cefa;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.form {
+  margin: 0 auto;
+  width: 400px;
+  display: flex;
+  gap: 12px;
+}
+
+.formInput {
+  background-color: #f9f9f9;
+}
+
+.formBtn {
+  background-color: #0000ff;
+  color: #ffffff;
+}
