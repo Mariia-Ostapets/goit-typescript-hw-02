@@ -1,7 +1,8 @@
 import css from "./ImageGallery.module.css";
 import ImageCard from "../ImageCard/ImageCard";
+import { ImageGalleryProps } from "./ImageGallery.types";
 
-export default function ImageGallery({ items, onImageClick }) {
+export default function ImageGallery({ items, onImageClick }:ImageGalleryProps) {
   return (
     <ul className={css.galleryList}>
       {items.map((item) => (
@@ -9,7 +10,7 @@ export default function ImageGallery({ items, onImageClick }) {
           <ImageCard
             small={item.urls.small}
             regular={item.urls.regular}
-            altDescription={item.alt_description}
+            alt_description={item.alt_description}
             onModalOpen={onImageClick}
           />
         </li>

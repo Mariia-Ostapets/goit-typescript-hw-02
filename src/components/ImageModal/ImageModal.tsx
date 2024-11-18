@@ -1,5 +1,6 @@
 import css from "./ImageModal.module.css";
 import Modal from "react-modal";
+import { ImageModalProps } from "./ImageModal.types";
 
 Modal.setAppElement("#root");
 
@@ -8,7 +9,7 @@ export default function ImageModal({
   closeModal,
   modalImage,
   modalAlt,
-}) {
+}: ImageModalProps) {
   return (
     <Modal
       isOpen={modalIsOpen}

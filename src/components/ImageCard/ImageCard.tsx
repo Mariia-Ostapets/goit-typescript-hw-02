@@ -1,17 +1,19 @@
 import css from "./ImageCard.module.css";
+import { ImageCardProps } from "./ImageCard.types";
 
 export default function ImageCard({
   small,
   regular,
-  altDescription,
+  alt_description,
   onModalOpen,
-}) {
+}: ImageCardProps) {
+
   return (
     <img
       className={css.galleryImage}
       src={small}
-      alt={altDescription}
-      onClick={() => onModalOpen(regular, altDescription)}
+      alt={alt_description}
+      onClick={() => onModalOpen(regular, alt_description)}
     ></img>
   );
 }

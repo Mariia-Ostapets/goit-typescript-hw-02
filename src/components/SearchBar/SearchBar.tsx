@@ -1,16 +1,18 @@
 import css from "./SearchBar.module.css";
 import toast from "react-hot-toast";
+import { SearchBarProps } from "./SearchBar.types";
+import { FormEvent } from "react";
 
-export default function SearchBar({ onSearch }) {
-  function handleSubmit(event) {
+export default function SearchBar({ onSearch }:SearchBarProps) {
+  function handleSubmit(event:FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = event.target;
-    const query = form.elements.query.value;
-    if (form.elements.query.value.trim() === "") {
+    const form = event.currentTarget;
+    const query = form.elements.namedItem("query") as HTMLInputElement;
+    if (query.value.trim() === "") {
       toast.error("Please enter search term!", { position: "top-right" });
       return;
-    }
-    onSearch(query);
+    }   
+    onSearch(query.value.trim());
     form.reset();
   }
 

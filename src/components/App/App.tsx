@@ -8,38 +8,40 @@ import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import {Image, ApiResponse} from "./App.types"
 
 export default function App() {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(16);
-  const [totalResults, setTotalResults] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalImage, setModalImage] = useState("");
-  const [modalAlt, setModalAlt] = useState("");
+  const [images, setImages] = useState<Image[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [perPage, setPerPage] = useState<number>(16);
+  const [totalResults, setTotalResults] = useState<number>(0);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [modalImage, setModalImage] = useState<string>("");
+  const [modalAlt, setModalAlt] = useState<string>("");
 
   const accessKey = "siUPmXWQjsZUTmUZyL9qGwIni_jF-Fn8uFhv33R3JPg";
 
-  async function fetchImagesWithQuery(query, page, perPage) {
+  async function fetchImagesWithQuery(query:string, page:number, perPage:number): Promise<Image[]> {
     const url = "https://api.unsplash.com/search/photos";
     try {
-      const response = await axios.get(url, {
+      const response = await axios.get<ApiResponse>(url, {
         params: { query, page, per_page: perPage },
         headers: { Authorization: `Client-ID ${accessKey}` },
       });
       setTotalResults(response.data.total);
       return response.data.results;
-    } catch (error) {
+    } catch (error: any) {
       setError(true);
       setErrorMessage(error.message);
+      return [];
     }
   }
 
-  async function handleSearch(newQuery) {
+  async function handleSearch(newQuery: string):Promise<void> {
     try {
       setImages([]);
       setError(false);
@@ -60,7 +62,7 @@ export default function App() {
     }
   }
 
-  async function loadMoreImages() {
+  async function loadMoreImages(): Promise<void> {
     try {
       setLoading(true);
       const nextPage = page + 1;
@@ -81,13 +83,13 @@ export default function App() {
 
   const canLoadMore = images.length < totalResults;
 
-  function openModal(url, alt) {
+  function openModal(url:string, alt:string):void {
     setModalImage(url);
     setModalAlt(alt);
     setIsModalOpen(true);
   }
 
-  function closeModal() {
+  function closeModal():void {
     setIsModalOpen(false);
   }
 
